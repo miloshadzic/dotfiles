@@ -1,0 +1,20 @@
+[user]
+	name = Miloš Hadžić
+	email = milos.hadzic@gmail.com
+[color]
+	ui = true
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	ps = push
+  root = rev-parse --show-toplevel
+  currentbranch = !git branch --contains HEAD | grep '*' | tr -s ' ' | cut -d ' ' -f2
+[push]
+	default = current
+[merge]
+	defaultToUpstream = true
+[core]
+	excludesfile = /home/milos/.gitignore
