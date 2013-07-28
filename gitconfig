@@ -1,6 +1,7 @@
 [user]
 	name = Miloš Hadžić
 	email = milos.hadzic@gmail.com
+	signingkey = 4A8BEBB8
 [color]
 	ui = true
 [alias]
@@ -13,8 +14,8 @@
   root = rev-parse --show-toplevel
   currentbranch = !git branch --contains HEAD | grep '*' | tr -s ' ' | cut -d ' ' -f2
 [push]
-	default = current
+	default = simple
 [merge]
 	defaultToUpstream = true
 [core]
-	excludesfile = /home/milos/.gitignore
+	excludesfile = /Users/milos/.gitignore
