@@ -1,4 +1,4 @@
 dotfiles
 ========
 
-Probably useless to anyone else.
+Everyone has them. Here are some of mine.

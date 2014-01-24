@@ -1,21 +1,13 @@
 [user]
-	name = Miloš Hadžić
-	email = milos.hadzic@gmail.com
-	signingkey = 4A8BEBB8
+	name = Miloš Hadžić
+	email = milos@rightfold.io
+[push]
+	default = simple
 [color]
 	ui = true
 [alias]
-	st = status
-	co = checkout
-	ci = commit
-	br = branch
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	ps = push
-  root = rev-parse --show-toplevel
-  currentbranch = !git branch --contains HEAD | grep '*' | tr -s ' ' | cut -d ' ' -f2
-[push]
-	default = simple
-[merge]
-	defaultToUpstream = true
-[core]
-	excludesfile = /Users/milos/.gitignore
+  ci = commit -v
+  ps = push
+  st = status
+  co = checkout
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
