@@ -1,10 +1,10 @@
 [user]
-	name = Miloš Hadžić
-	email = milos@rightfold.io
+  name = Miloš Hadžić
+  email = milos@rightfold.io
 [push]
-	default = simple
+  default = simple
 [color]
-	ui = true
+  ui = true
 [alias]
   ci = commit -v
   ps = push
