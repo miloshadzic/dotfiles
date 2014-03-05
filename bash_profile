@@ -10,4 +10,4 @@ export PS1="\u at \[`tput setaf 16`\]\h\[`tput sgr 0`\] in \W > "
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-export PATH=/usr/local/bin:$PATH
+export PATH=~/.cabal/bin:/usr/local/bin:$PATH
