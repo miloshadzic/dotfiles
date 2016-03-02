@@ -3,10 +3,10 @@ syntax on
 filetype on
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Bundle 'VundleVim/Vundle.vim'
 
 Bundle 'tpope/vim-fugitive'
 Bundle "rking/ag.vim"
