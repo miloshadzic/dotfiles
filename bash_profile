@@ -10,4 +10,4 @@ export PS1="\u at \[`tput setaf 16`\]\h\[`tput sgr 0`\] in \W > "
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-export PATH=~/.cabal/bin:/usr/local/bin:$PATH
+eval "$(stack --bash-completion-script stack)"
