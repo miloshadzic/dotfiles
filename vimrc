@@ -20,6 +20,8 @@ Bundle "wting/rust.vim"
 Bundle "tpope/vim-markdown"
 Bundle "thoughtbot/vim-rspec"
 Bundle 'L9'
+Bundle 'scrooloose/syntastic'
+Plugin 'cakebaker/scss-syntax.vim'
 
 filetype plugin indent on
 colorscheme hemisu
@@ -60,5 +62,19 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+
+au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+
+map <Leader>s :SyntasticToggleMode<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
 
 autocmd! bufwritepost .vimrc source ~/.vimrc
