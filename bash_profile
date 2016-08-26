@@ -14,3 +14,10 @@ eval "$(stack --bash-completion-script stack)"
 
 export PATH=$PATH:/Users/milos/.local/bin
 export PATH=$PATH:/Users/milos/.stack/programs/x86_64-osx/ghc-7.10.3/bin
+
+export GOPATH=$HOME/.golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:~/.cargo/bin
+
+export RUST_SRC_PATH=~/src/rustc-1.11.0/src

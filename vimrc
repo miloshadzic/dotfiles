@@ -22,6 +22,8 @@ Bundle "thoughtbot/vim-rspec"
 Bundle 'L9'
 Bundle 'scrooloose/syntastic'
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'fatih/vim-go'
+Plugin 'slim-template/vim-slim'
 
 filetype plugin indent on
 colorscheme hemisu
