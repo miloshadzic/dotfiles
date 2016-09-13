@@ -10,13 +10,11 @@ Bundle 'VundleVim/Vundle.vim'
 
 Bundle 'tpope/vim-fugitive'
 Bundle "rking/ag.vim"
-Bundle "noahfrederick/vim-hemisu"
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-haml'
-Bundle "kchmck/vim-coffee-script"
 Bundle "kien/ctrlp.vim"
-Bundle "wting/rust.vim"
+Bundle "rust-lang/rust.vim"
 Bundle "tpope/vim-markdown"
 Bundle "thoughtbot/vim-rspec"
 Bundle 'L9'
@@ -24,9 +22,10 @@ Bundle 'scrooloose/syntastic'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'fatih/vim-go'
 Plugin 'slim-template/vim-slim'
+Plugin 'dracula/vim'
 
 filetype plugin indent on
-colorscheme hemisu
+colorscheme dracula
 set background=dark
 
 set autoindent
@@ -78,5 +77,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+let g:rustfmt_autosave = 1
 
 autocmd! bufwritepost .vimrc source ~/.vimrc
