@@ -28,3 +28,4 @@ export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_pass
 alias ls=exa
 alias http="http --style native"
 
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"

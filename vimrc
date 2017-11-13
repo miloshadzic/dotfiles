@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
+Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-fugitive'
 Plug 'rking/ag.vim'
 Plug 'sheerun/vim-polyglot'
@@ -6,7 +7,10 @@ Plug 'scrooloose/syntastic'
 Plug 'reedes/vim-pencil'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'brendonrapp/smyck-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 let g:onedark_terminal_italics=1
@@ -43,15 +47,15 @@ set wildignore=*/tmp/*,*.so,*.swp,*.zip,*/vendor/bundle/*,*/bin/*
 let mapleader = ','
 
 
-map <Leader>f :Files<CR>
-map <Leader>b :Buffers<CR>
-
+map <Leader>f :CtrlP<CR>
+map <Leader>b :CtrlPBuffer<CR>
 
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = "te bundle exec rspec {spec}"
 
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
