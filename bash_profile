@@ -5,7 +5,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
-export PS1="\[`tput setaf 5`\]\u \[`tput sgr 0`\]on \[`tput setaf 14`\]\h\[`tput sgr 0`\] in \W → "
+export PS1="\[`tput setaf 3`\]\u\[`tput sgr 0`\]\[`tput sgr 0`\] in \[\e[1;02m\]\w\[\e[0m\]\n§ "
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
