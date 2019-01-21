@@ -13,7 +13,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'noprompt/vim-yardoc'
 Plug 'ngmy/vim-rubocop'
 Plug 'janko-m/vim-test'
-Plug 'nixprime/cpsm', { 'do': 'env PY3=OFF ./install.sh' }
+Plug 'nixprime/cpsm', { 'do': 'env PY3=ON ./install.sh' }
 call plug#end()
 
 let g:onedark_terminal_italics=1
@@ -52,11 +52,19 @@ let mapleader = ','
 map <Leader>f :CtrlP<CR>
 map <Leader>b :CtrlPBuffer<CR>
 set grepprg=rg\ --color=never
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' }
 set wildignore=*/tmp/*,*.so,*.swp,*.zip,vendor/bundle/**,*/bin/*
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_use_caching = 0
 
+let g:ctrlp_mruf_exclude = '.*/tmp/.*\|.*/.git/.*'
+let g:ctrlp_max_files = 200000
+let g:ctrlp_mruf_relative = 1
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore=vendor -g ""'
+    let g:ctrlp_use_caching = 0
+else
+    let g:ctrlp_clear_cache_on_exit = 0
+endif
 
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
