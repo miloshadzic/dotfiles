@@ -13,13 +13,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'noprompt/vim-yardoc'
 Plug 'ngmy/vim-rubocop'
 Plug 'janko-m/vim-test'
-Plug 'nixprime/cpsm', { 'do': 'env PY3=ON ./install.sh' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --no-bash' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 let g:onedark_terminal_italics=1
+colorscheme smyck
 set background=dark
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme smyck
 highlight Comment cterm=italic
 let g:airline_theme='base16'
 
@@ -49,8 +50,9 @@ set shell=$SHELL
 
 let mapleader = ','
 
-map <Leader>f :CtrlP<CR>
-map <Leader>b :CtrlPBuffer<CR>
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>F :Files <C-r>=expand("%:h")<CR>/<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 set grepprg=rg\ --color=never
 set wildignore=*/tmp/*,*.so,*.swp,*.zip,vendor/bundle/**,*/bin/*
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
