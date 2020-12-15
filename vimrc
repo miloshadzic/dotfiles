@@ -1,24 +1,22 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-fugitive'
-Plug 'rking/ag.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/syntastic'
-Plug 'reedes/vim-pencil'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'brendonrapp/smyck-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'noprompt/vim-yardoc'
 Plug 'ngmy/vim-rubocop'
 Plug 'janko-m/vim-test'
+Plug 'rust-lang/rust.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --no-bash' }
 Plug 'junegunn/fzf.vim'
+Plug 'noahfrederick/vim-hemisu'
 call plug#end()
 
 let g:onedark_terminal_italics=1
-colorscheme smyck
+syntax on
+colorscheme hemisu
 set background=dark
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 highlight Comment cterm=italic
@@ -55,18 +53,6 @@ nnoremap <silent> <leader>F :Files <C-r>=expand("%:h")<CR>/<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 set grepprg=rg\ --color=never
 set wildignore=*/tmp/*,*.so,*.swp,*.zip,vendor/bundle/**,*/bin/*
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-let g:ctrlp_use_caching = 0
-
-let g:ctrlp_mruf_exclude = '.*/tmp/.*\|.*/.git/.*'
-let g:ctrlp_max_files = 200000
-let g:ctrlp_mruf_relative = 1
-if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore=vendor -g ""'
-    let g:ctrlp_use_caching = 0
-else
-    let g:ctrlp_clear_cache_on_exit = 0
-endif
 
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -80,20 +66,9 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 let g:rspec_command = "te bundle exec rspec {spec}"
 
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-
-map <Leader>s :SyntasticToggleMode<CR>
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
 let g:rustfmt_autosave = 1
 
-let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
-let g:pandoc#filetypes#pandoc_markdown = 0
+autocmd! bufwritepost .vimrc source ~/.nvim/config/init.vim
 
-
-autocmd! bufwritepost .vimrc source ~/.vimrc
+let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
