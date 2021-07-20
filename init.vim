@@ -5,7 +5,7 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 Plug 'tjdevries/colorbuddy.nvim'
-Plug '~/src/hemisu.nvim'
+Plug 'git@github.com:miloshadzic/hemisu.nvim.git'
 
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
