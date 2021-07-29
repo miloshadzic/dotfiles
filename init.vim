@@ -14,9 +14,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-" Rust
 Plug 'neovim/nvim-lspconfig'
-" Extensions to built-in LSP, for example, providing type inlay hints
 Plug 'nvim-lua/lsp_extensions.nvim'
 
 Plug 'noprompt/vim-yardoc'
@@ -27,6 +25,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'hoob3rt/lualine.nvim'
 Plug 'hrsh7th/nvim-compe'
+
+Plug 'ziglang/zig.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -88,7 +88,6 @@ let g:rustfmt_autosave = 1
 
 autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim
 
-    
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
 set updatetime=300
@@ -112,6 +111,7 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 lua <<EOF
 require'config/compe'
 require'config/treesitter'
+require'config/telescope'
 require'config/lsp'
 require'config/lualine'
 EOF
