@@ -27,6 +27,7 @@ export PATH=$PATH:/Users/milos/.local/bin
 export PATH=/usr/local/opt/mysql@5.7/bin:$PATH
 
 export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:~/bin
 
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_pass
 export FZF_DEFAULT_COMMAND='fd --type f'
