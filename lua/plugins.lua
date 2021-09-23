@@ -16,8 +16,14 @@ return require('packer').startup(function()
   use 'nvim-telescope/telescope.nvim'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  use 'ray-x/go.nvim'
+
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/lsp_extensions.nvim'
+
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/nvim-cmp'
 
   use 'noprompt/vim-yardoc'
   use 'ngmy/vim-rubocop'

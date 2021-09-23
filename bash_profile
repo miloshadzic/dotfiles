@@ -37,6 +37,7 @@ alias ls=exa
 alias http="http --style native"
 
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+export PATH=$PATH:$GOPATH/bin
 
 # heroku autocomplete setup
 HEROKU_AC_BASH_SETUP_PATH=/Users/milos/Library/Caches/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;
