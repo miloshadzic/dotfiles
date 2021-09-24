@@ -32,6 +32,4 @@ return require('packer').startup(function()
   use 'tpope/vim-fugitive'
 
   use 'hoob3rt/lualine.nvim'
-
-  use 'ziglang/zig.vim'
 end)

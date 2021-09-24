@@ -11,8 +11,6 @@ g.mapleader = ','
 
 o.clipboard = 'unnamedplus'
 
-opt.shell = os.getenv('SHELL')
-
 opt.termguicolors = true
 g.syntax = true
 
@@ -47,13 +45,11 @@ wo.number = true
 vim.opt.listchars.tab = '▸ '
 vim.opt.listchars.trail = 'trail:▫'
 
--- Golang config --
-
 -- Format on save
-vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
+vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
 
 -- Import on save
-vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
+vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
 
 require'config/treesitter'
 require'config/telescope'
