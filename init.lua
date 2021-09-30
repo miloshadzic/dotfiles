@@ -41,9 +41,9 @@ opt.wildmenu = true
 opt.wildmode = 'longest,list,full'
 opt.mouse = 'a'
 wo.number = true
+wo.relativenumber = true
 
-vim.opt.listchars.tab = '▸ '
-vim.opt.listchars.trail = 'trail:▫'
+opt.listchars = { tab = "▸ ", trail = "▫" }
 
 -- Format on save
 vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)

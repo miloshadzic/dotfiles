@@ -1,13 +1,14 @@
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  use 'tjdevries/colorbuddy.nvim'
-  use 'git@github.com:miloshadzic/hemisu.nvim.git'
+  use 'lewis6991/impatient.nvim'
 
-  use 'christianchiarulli/nvcode-color-schemes.vim'
+  use 'tjdevries/colorbuddy.nvim'
+  use '~/src/hemisu.nvim'
+
   use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
   }
 
   use 'nvim-lua/popup.nvim'
@@ -25,8 +26,6 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/nvim-cmp'
 
-  use 'noprompt/vim-yardoc'
-  use 'ngmy/vim-rubocop'
   use 'janko-m/vim-test'
 
   use 'tpope/vim-fugitive'

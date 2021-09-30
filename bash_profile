@@ -26,6 +26,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   test -r /Users/milos/.opam/opam-init/init.sh && . /Users/milos/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 fi
 
+if [ "$UNAME" == "linux" ]; then
+  /usr/bin/keychain --nogui --quiet $HOME/.ssh/id_ed25519
+  source $HOME/.keychain/$HOSTNAME-sh
+fi
+
 
 export PS1="\[`tput setaf 10`\]\u\[`tput sgr 0`\]\[`tput sgr 0`\] in \[\e[1;02m\]\w\[\e[0m\]\n§ "
 
@@ -47,3 +52,6 @@ alias ls=exa
 alias http="http --style native"
 export GOPATH="/home/milos/go"
 export PATH=$PATH:$GOPATH/bin
+
+eval "$(rbenv init -)"
+
