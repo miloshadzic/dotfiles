@@ -45,14 +45,13 @@ wo.relativenumber = true
 
 opt.listchars = { tab = "▸ ", trail = "▫" }
 
--- Format on save
-vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
-
 -- Import on save
 vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
 
+-- Format on save
+vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
+
 require'config/treesitter'
 require'config/telescope'
-require'config/nvim-cmp'
 require'config/lsp'
 require'config/lualine'
