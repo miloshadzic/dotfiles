@@ -26,7 +26,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   test -r /Users/milos/.opam/opam-init/init.sh && . /Users/milos/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 fi
 
-if [ "$UNAME" == "linux" ]; then
+if [[ "$OSTYPE" == "linux-gnu"* || ! -z "$IS_WSL" || ! -z "$WSL_DISTRO_NAME" ]]; then
   /usr/bin/keychain --nogui --quiet $HOME/.ssh/id_ed25519
   source $HOME/.keychain/$HOSTNAME-sh
 fi

@@ -12,9 +12,11 @@ return require('packer').startup(function()
   }
 
   use 'nvim-lua/popup.nvim'
-  use 'nvim-lua/plenary.nvim'
 
-  use 'nvim-telescope/telescope.nvim'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { { 'nvim-lua/plenary.nvim' } }
+  }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   use 'ray-x/go.nvim'
