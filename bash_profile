@@ -1,7 +1,4 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  source /usr/local/opt/chruby/share/chruby/chruby.sh
-  source /usr/local/opt/chruby/share/chruby/auto.sh
-
   if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
     BASH_COMPLETION="$(brew --prefix)/etc/bash_completion"
     . "$(brew --prefix)/etc/bash_completion"
@@ -54,3 +51,4 @@ export PATH=$PATH:$GOPATH/bin
 
 eval "$(rbenv init -)"
 
+. "$HOME/.cargo/env"
