@@ -58,6 +58,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 require'lspconfig'.gopls.setup{}
 
+require'lspconfig'.clangd.setup{}
+
 require('go').setup({
   goimport='gopls', -- goimport command, can be gopls[default], gofumports[deprecated] or goimport
   gofmt = 'gofumpt', --gofmt cmd,
@@ -70,7 +72,7 @@ require('go').setup({
   lsp_cfg = false, -- true: apply go.nvim non-default gopls setup, if it is a list, will merge with gopls setup e.g.
                    -- lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
   lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
-  lsp_on_attach = true, -- if a on_attach function provided:  attach on_attach function to gopls
+  lsp_on_attach = nil, -- if a on_attach function provided:  attach on_attach function to gopls
                        -- true: will use go.nvim on_attach if true
                        -- nil/false do nothing
   lsp_codelens = true, -- set to false to disable codelens, true by default

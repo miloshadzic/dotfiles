@@ -12,6 +12,7 @@ return require('packer').startup(function()
   }
 
   use 'nvim-lua/popup.nvim'
+  use 'numToStr/Comment.nvim'
 
   use {
     'nvim-telescope/telescope.nvim',

@@ -1,10 +1,12 @@
 local cmp = require'cmp'
 
 cmp.setup({
+  experimental = {
+    custom_menu = true
+  },
   snippet = {
     expand = function(args)
-      -- For `vsnip` user.
-      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
 
       -- For `luasnip` user.
       -- require('luasnip').lsp_expand(args.body)

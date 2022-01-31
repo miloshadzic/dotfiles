@@ -9,8 +9,6 @@ local bo = vim.bo
 
 g.mapleader = ','
 
-o.clipboard = 'unnamedplus'
-
 opt.termguicolors = true
 g.syntax = true
 
@@ -55,3 +53,4 @@ require'config/treesitter'
 require'config/telescope'
 require'config/lsp'
 require'config/lualine'
+require'config/comment'
