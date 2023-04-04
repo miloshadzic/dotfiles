@@ -13,8 +13,7 @@ opt.termguicolors = true
 g.syntax = true
 
 require 'hemisu'
-
-opt.completeopt = 'menuone,noselect'
+require 'builder-dark'
 
 -- Temporarily source the vim part
 cmd('source ~/.config/nvim/vimconfig.vim')
@@ -43,11 +42,31 @@ wo.relativenumber = true
 
 opt.listchars = { tab = "▸ ", trail = "▫" }
 
+vim.o.completeopt = "menuone,noinsert,noselect"
+vim.opt.shortmess = vim.opt.shortmess + "c"
+
 -- Import on save
 vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
 
 -- Format on save
 vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
+
+-- Set updatetime for CursorHold
+-- 300ms of no cursor movement to trigger CursorHold
+opt.updatetime = 100
+
+-- Show diagnostic popup on cursor hover
+local diag_float_grp = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true })
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+   vim.diagnostic.open_float(nil, { focusable = false })
+  end,
+  group = diag_float_grp,
+})
+
+-- Goto previous/next diagnostic warning/error
+vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, keymap_opts)
+vim.keymap.set("n", "g]", vim.diagnostic.goto_next, keymap_opts)
 
 require'config/treesitter'
 require'config/telescope'

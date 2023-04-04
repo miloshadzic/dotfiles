@@ -1,8 +1,11 @@
 local cmp = require'cmp'
 
 cmp.setup({
-  experimental = {
-    custom_menu = true
+  view = {
+     entries = 'native'
+  },
+  window = {
+    documentation = true
   },
   snippet = {
     expand = function(args)

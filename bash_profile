@@ -1,3 +1,5 @@
+export PATH="/home/milos/.local/share/solana/install/active_release/bin:$PATH"
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
     BASH_COMPLETION="$(brew --prefix)/etc/bash_completion"
@@ -24,10 +26,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* || ! -z "$IS_WSL" || ! -z "$WSL_DISTRO_NAME" ]]; then
-  /usr/bin/keychain --nogui --quiet $HOME/.ssh/id_ed25519
-  source $HOME/.keychain/$HOSTNAME-sh
+  if [ -f /usr/bin/keychain ]; then
+    /usr/bin/keychain --nogui --quiet $HOME/.ssh/id_ed25519
+    source $HOME/.keychain/$HOSTNAME-sh
+  fi
 fi
-
 
 export PS1="\[`tput setaf 10`\]\u\[`tput sgr 0`\]\[`tput sgr 0`\] in \[\e[1;02m\]\w\[\e[0m\]\n§ "
 
@@ -40,6 +43,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:~/bin
+export PATH=$PATH:~/.rbenv/bin
 
 export FZF_DEFAULT_COMMAND='fd --type f'
 export BAT_THEME="TwoDark"
@@ -49,6 +53,8 @@ alias http="http --style native"
 export GOPATH="/home/milos/go"
 export PATH=$PATH:$GOPATH/bin
 
-eval "$(rbenv init -)"
+eval "$(rbenv init - bash)"
 
 . "$HOME/.cargo/env"
+
+export PATH="/home/milos/.local/share/solana/install/active_release/bin:$PATH"
