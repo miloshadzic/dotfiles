@@ -1,28 +1,21 @@
 export PATH="/home/milos/.local/share/solana/install/active_release/bin:$PATH"
+. "$HOME/.cargo/env"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
   if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
     BASH_COMPLETION="$(brew --prefix)/etc/bash_completion"
     . "$(brew --prefix)/etc/bash_completion"
   fi
-
-  if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-    . /usr/local/share/bash-completion/bash_completion
-  fi
-
-  export PATH=$PATH:/Users/milos/.local/bin
 
   export PATH=/usr/local/opt/mysql@5.7/bin:$PATH
 
   export LC_ALL=en_US.UTF-8
 
   export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-
-  # heroku autocomplete setup
-  HEROKU_AC_BASH_SETUP_PATH=/Users/milos/Library/Caches/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH;
-
-  # opam configuration
-  test -r /Users/milos/.opam/opam-init/init.sh && . /Users/milos/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+  export GOPATH="/Users/mh/src/go"
+  export PATH="$PATH:/usr/local/mysql/bin/"
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* || ! -z "$IS_WSL" || ! -z "$WSL_DISTRO_NAME" ]]; then
@@ -50,11 +43,13 @@ export BAT_THEME="TwoDark"
 
 alias ls=exa
 alias http="http --style native"
-export GOPATH="/home/milos/go"
 export PATH=$PATH:$GOPATH/bin
 
 eval "$(rbenv init - bash)"
 
 . "$HOME/.cargo/env"
 
-export PATH="/home/milos/.local/share/solana/install/active_release/bin:$PATH"
+export PATH="/Users/mh/.local/share/solana/install/active_release/bin:$PATH"
+export PATH="/usr/local/opt/node@16/bin:$PATH"
+
+export SHELL="/bin/bash"

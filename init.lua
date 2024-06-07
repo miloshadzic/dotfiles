@@ -13,7 +13,10 @@ opt.termguicolors = true
 g.syntax = true
 
 require 'hemisu'
-require 'builder-dark'
+-- require 'builder-dark'
+-- vim.cmd [[colorscheme rasmus]]
+
+opt.completeopt = 'menuone,noselect,longest'
 
 -- Temporarily source the vim part
 cmd('source ~/.config/nvim/vimconfig.vim')
@@ -35,7 +38,7 @@ opt.smartcase = true
 opt.softtabstop = 2
 opt.tabstop = 2
 opt.wildmenu = true
-opt.wildmode = 'longest,list,full'
+opt.wildmode = 'longest:full,full'
 opt.mouse = 'a'
 wo.number = true
 wo.relativenumber = true
@@ -45,11 +48,14 @@ opt.listchars = { tab = "▸ ", trail = "▫" }
 vim.o.completeopt = "menuone,noinsert,noselect"
 vim.opt.shortmess = vim.opt.shortmess + "c"
 
--- Import on save
-vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
-
--- Format on save
-vim.cmd([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
+local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimports()
+  end,
+  group = format_sync_grp,
+})
 
 -- Set updatetime for CursorHold
 -- 300ms of no cursor movement to trigger CursorHold
@@ -73,3 +79,4 @@ require'config/telescope'
 require'config/lsp'
 require'config/lualine'
 require'config/comment'
+require'config/snippets'

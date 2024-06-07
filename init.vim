@@ -4,7 +4,7 @@ nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>h <cmd>lua require('telescope.builtin').help_tags()<cr>p
 nnoremap <leader>p <cmd>lua require('telescope.builtin').treesitter()<cr>p
 
-let g:clipboard = "unnamedplus"
+let g:clipboard = "unnamed"
 
 set grepprg=rg\ --color=never
 set wildignore=*/tmp/*,*.so,*.swp,*.zip,vendor/bundle/**,*/bin/*
