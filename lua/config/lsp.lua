@@ -107,7 +107,13 @@ require("rust-tools").setup(opts)
 
 require'lspconfig'.tsserver.setup{}
 
-require'lspconfig'.gopls.setup{}
+require'lspconfig'.gopls.setup{
+  settings = {
+    gopls = {
+      gofumpt = true
+    }
+  }
+}
 
 require'lspconfig'.clangd.setup{}
 

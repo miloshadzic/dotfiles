@@ -13,8 +13,6 @@ opt.termguicolors = true
 g.syntax = true
 
 require 'hemisu'
--- require 'builder-dark'
--- vim.cmd [[colorscheme rasmus]]
 
 opt.completeopt = 'menuone,noselect,longest'
 

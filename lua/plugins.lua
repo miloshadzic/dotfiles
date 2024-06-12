@@ -5,8 +5,6 @@ return require('packer').startup(function()
 
   use 'tjdevries/colorbuddy.nvim'
   use '~/src/hemisu.nvim'
-  use '~/src/builder-dark.nvim'
-  use 'kvrohit/rasmus.nvim'
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -23,6 +21,9 @@ return require('packer').startup(function()
 
   use 'simrat39/rust-tools.nvim'
   use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'ray-x/guihua.lua'
 
   use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
 
