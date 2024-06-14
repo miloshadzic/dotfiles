@@ -53,5 +53,5 @@ return require('packer').startup(function()
 
   use 'tpope/vim-fugitive'
 
-  use 'hoob3rt/lualine.nvim'
+  use 'nvim-lualine/lualine.nvim'
 end)
