@@ -6,10 +6,12 @@ SETUVAR _fisher_plugins:jorgebucaran/hydro\x1erbenv/fish\x2drbenv
 SETUVAR _fisher_rbenv_2F_fish_2D_rbenv_files:\x7e/\x2econfig/fish/functions/rbenv\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/rbenv\x2efish\x1e\x7e/\x2econfig/fish/completions/rbenv\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR _hydro_git_11448:main\u2022\x20
+SETUVAR _hydro_git_1145:master\u2022\x20
 SETUVAR _hydro_git_143:master\u2022\x20
 SETUVAR _hydro_git_19133:main\u2022\x20
 SETUVAR _hydro_git_20325:master\u2022\x20
-SETUVAR _hydro_git_274:master\u2022\x20
+SETUVAR _hydro_git_2502:master\u2022\x20
+SETUVAR _hydro_git_2749:master\u2022\x20
 SETUVAR _hydro_git_29821:master\u2022\x20
 SETUVAR _hydro_git_30189:master\u2022\x20
 SETUVAR _hydro_git_36359:master\u2022\x20

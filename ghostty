@@ -195,7 +195,7 @@ grapheme-width-method = unicode
 theme = 
 
 # Background color for the window.
-background = "#000000"
+background = "#0d0d0d"
 
 # Foreground color for the window.
 foreground = #ffffff
