@@ -35,3 +35,9 @@ nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
 set signcolumn=yes
+
+augroup odinindent
+  autocmd FileType odin setlocal expandtab
+  autocmd FileType odin setlocal tabstop=4
+  autocmd FileType odin setlocal shiftwidth=4
+augroup END

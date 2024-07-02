@@ -123,3 +123,17 @@ require'lspconfig'.sqlls.setup({
 
 require('go').setup(
 )
+
+require('lspconfig-bundler').setup()
+require'lspconfig'.solargraph.setup{}
+
+require'lspconfig'.ruby_lsp.setup{
+}
+
+nvim_lsp.ols.setup({
+  root_dir = nvim_lsp.util.root_pattern("ols.json"),
+  format_on_save = { timeout_ms = 500, lsp_fallback = true },
+  on_attach = vim.lsp.on_attach,
+  capabilities = capabilities,
+  filetypes  = { "odin" }
+})

@@ -12,7 +12,7 @@ g.mapleader = ','
 opt.termguicolors = true
 g.syntax = true
 
-require 'hemisu'
+require 'xemucy'
 
 opt.completeopt = 'menuone,noselect,longest'
 
@@ -68,6 +68,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
   group = diag_float_grp,
 })
 
+
 -- Goto previous/next diagnostic warning/error
 vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, keymap_opts)
 vim.keymap.set("n", "g]", vim.diagnostic.goto_next, keymap_opts)
@@ -78,3 +79,7 @@ require'config/lsp'
 require'config/lualine'
 require'config/comment'
 require'config/snippets'
+
+vim.cmd('autocmd FileType ruby setlocal indentkeys-=.')
+
+vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = false}]]

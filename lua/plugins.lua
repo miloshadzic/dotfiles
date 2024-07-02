@@ -31,6 +31,7 @@ return require('packer').startup(function()
 
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/lsp_extensions.nvim'
+  use { 'mihyaeru21/nvim-lspconfig-bundler', requires = 'neovim/nvim-lspconfig' }
 
   use ({
     'dcampos/nvim-snippy',
