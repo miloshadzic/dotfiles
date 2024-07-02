@@ -9,6 +9,7 @@ SETUVAR _hydro_git_11448:main\u2022\x20
 SETUVAR _hydro_git_143:master\u2022\x20
 SETUVAR _hydro_git_19133:main\u2022\x20
 SETUVAR _hydro_git_20325:master\u2022\x20
+SETUVAR _hydro_git_274:master\u2022\x20
 SETUVAR _hydro_git_29821:master\u2022\x20
 SETUVAR _hydro_git_30189:master\u2022\x20
 SETUVAR _hydro_git_36359:master\u2022\x20
@@ -19,6 +20,8 @@ SETUVAR _hydro_git_79216:main\u2022\x20
 SETUVAR _hydro_git_90718:master\u2022\x20
 SETUVAR _hydro_git_91057:master\u2022\x20
 SETUVAR _hydro_git_91942:master\u2022\x20
+SETUVAR _hydro_git_97862:master\u2022\x20
+SETUVAR _hydro_git_98477:master\u2022\x20
 SETUVAR fish_color_autosuggestion:585858
 SETUVAR fish_color_cancel:\x2d\x2dreverse
 SETUVAR fish_color_command:a1b56c
