@@ -25,7 +25,7 @@ return require('packer').startup(function()
   use 'theHamsta/nvim-dap-virtual-text'
   use 'ray-x/guihua.lua'
 
-  use {'nvim-telescope/telescope-fzy-native.nvim', run = 'make' }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   use 'ray-x/go.nvim'
 

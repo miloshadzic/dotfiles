@@ -105,7 +105,7 @@ local opts = {
 
 require("rust-tools").setup(opts)
 
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.ts_ls.setup{}
 
 require'lspconfig'.gopls.setup{
   settings = {
