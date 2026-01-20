@@ -6,6 +6,7 @@ nnoremap <leader>p <cmd>lua require('telescope.builtin').treesitter()<cr>p
 
 set grepprg=rg\ --color=never
 set wildignore=*/tmp/*,*.so,*.swp,*.zip,vendor/bundle/**,*/bin/*
+set clipboard=unnamedplus
 
 " test maps
 map <Leader>t :call RunCurrentSpecFile()<CR>

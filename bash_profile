@@ -53,3 +53,4 @@ export PATH="/Users/mh/.local/share/solana/install/active_release/bin:$PATH"
 export PATH="/usr/local/opt/node@16/bin:$PATH"
 
 export SHELL="/bin/bash"
+. "/Users/mh/.deno/env"

@@ -9,6 +9,7 @@ set -gx ODIN_ROOT /opt/homebrew/opt/odin/libexec
 set -gx CPATH /opt/homebrew/include
 set -gx LIBRARY_PATH /opt/homebrew/lib
 
+fish_add_path ./bin
 fish_add_path $GOPATH/bin
 fish_add_path ~/bin
 fish_add_path usr/local/opt/llvm/bin
@@ -19,3 +20,6 @@ if status is-interactive
   # Commands to run in interactive sessions can go here
 end
 
+set fish_function_path (path resolve $__fish_config_dir/functions/*/) $fish_function_path
+
+status --is-interactive; and frum init | source

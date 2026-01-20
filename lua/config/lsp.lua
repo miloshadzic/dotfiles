@@ -1,6 +1,4 @@
 -- nvim_lsp object
-local nvim_lsp = require'lspconfig'
-
 local cmp = require'cmp'
 
 cmp.setup({
@@ -43,7 +41,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
-nvim_lsp.emmet_language_server.setup({})
+vim.lsp.config("emmet_language_server", {})
+
+vim.lsp.enable('biome')
 
 -- Setup buffer-local keymaps / options for LSP buffers
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -103,37 +103,58 @@ local opts = {
   },
 }
 
-require("rust-tools").setup(opts)
+vim.lsp.config("rust-tools", opts)
 
-require'lspconfig'.ts_ls.setup{}
+vim.lsp.config("ts_ls", {})
 
-require'lspconfig'.gopls.setup{
+vim.lsp.config("gopls", {
   settings = {
     gopls = {
       gofumpt = true
     }
   }
-}
+})
 
-require'lspconfig'.clangd.setup{}
+vim.lsp.config("ruby_lsp", {
+  init_options = {
+    formatter = 'standard',
+    linters = { 'standard' },
+  },
+})
 
-require'lspconfig'.sqlls.setup({
+vim.lsp.config("clangd", {})
+
+vim.lsp.config("sqlls", {
   cmd = {"sql-language-server", "up", "--method", "stdio"}
 })
 
 require('go').setup(
 )
 
-require('lspconfig-bundler').setup()
-require'lspconfig'.solargraph.setup{}
+vim.lsp.config('lspconfig-bundler', {})
+vim.lsp.config("solargraph", {})
 
-require'lspconfig'.ruby_lsp.setup{
-}
+require("conform").setup({
+  formatters = {
+    biome = {
+      require_cwd = true,
+    },
+  },
+  formatters_by_ft = {
+    rust =  { "rustfmt", lsp_format = "fallback" },
+    ruby =  { "rubyfmt", lsp_format = "fallback" },
+    html =  { "htmlbeautifier", lsp_format = "fallback" },
+    eruby = { "htmlbeautifier", lsp_format = "fallback" },
 
-nvim_lsp.ols.setup({
-  root_dir = nvim_lsp.util.root_pattern("ols.json"),
-  format_on_save = { timeout_ms = 500, lsp_fallback = true },
-  on_attach = vim.lsp.on_attach,
-  capabilities = capabilities,
-  filetypes  = { "odin" }
+
+    json = { "biome-check", "biome", stop_after_first = true },
+    css = { "biome-check", "biome", stop_after_first = true },
+    javascript = { "biome-check", "biome", "prettierd", "prettier", stop_after_first = true },
+    typescript = { "biome-check", "biome", stop_after_first = true },
+  },
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
 })

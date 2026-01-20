@@ -1,58 +1,59 @@
-return require('packer').startup(function()
-  use 'wbthomason/packer.nvim'
+return {
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    config = true,
+  },
 
-  use 'lewis6991/impatient.nvim'
+  'lewis6991/impatient.nvim',
 
-  use 'tjdevries/colorbuddy.nvim'
-  use '~/src/hemisu.nvim'
-
-  use {
+  'tjdevries/colorbuddy.nvim',
+  'git@github.com:miloshadzic/xemucy.git',
+  {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
+    build = ':TSUpdate'
+  },
 
-  use 'nvim-lua/popup.nvim'
-  use 'numToStr/Comment.nvim'
+  'nvim-lua/popup.nvim',
+  'numToStr/Comment.nvim',
 
-  use {
+  {
     'nvim-telescope/telescope.nvim', tag = '0.1.4',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+    dependencies = { {'nvim-lua/plenary.nvim'} }
+  },
 
-  use 'simrat39/rust-tools.nvim'
-  use 'mfussenegger/nvim-dap'
-  use 'rcarriga/nvim-dap-ui'
-  use 'theHamsta/nvim-dap-virtual-text'
-  use 'ray-x/guihua.lua'
+  'simrat39/rust-tools.nvim',
+  'mfussenegger/nvim-dap',
+  'rcarriga/nvim-dap-ui',
+  'theHamsta/nvim-dap-virtual-text',
+  'ray-x/guihua.lua',
 
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
-  use 'ray-x/go.nvim'
+  'ray-x/go.nvim',
 
-  use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/lsp_extensions.nvim'
-  use { 'mihyaeru21/nvim-lspconfig-bundler', requires = 'neovim/nvim-lspconfig' }
+  'neovim/nvim-lspconfig',
+  'nvim-lua/lsp_extensions.nvim',
+  { 'mihyaeru21/nvim-lspconfig-bundler', dependencies = 'neovim/nvim-lspconfig' },
 
-  use ({
-    'dcampos/nvim-snippy',
-    'honza/vim-snippets',
-  })
+  'dcampos/nvim-snippy',
+  'honza/vim-snippets',
 
-  use("hrsh7th/nvim-cmp")
-  use({
+  "hrsh7th/nvim-cmp",
+  {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-path",
     'dcampos/cmp-snippy',
     "hrsh7th/cmp-buffer",
-    after = { "hrsh7th/nvim-cmp" },
-    requires = { "hrsh7th/nvim-cmp" },
-  })
+    dependencies = { "hrsh7th/nvim-cmp" },
+  },
+  "stevearc/conform.nvim",
 
-  use 'janko-m/vim-test'
+  'janko-m/vim-test',
 
-  use 'tpope/vim-fugitive'
+  'tpope/vim-fugitive',
 
-  use 'nvim-lualine/lualine.nvim'
-end)
+  'nvim-lualine/lualine.nvim',
+}

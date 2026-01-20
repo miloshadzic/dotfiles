@@ -1,5 +1,3 @@
-require 'plugins'
-
 local opt = vim.opt
 local cmd = vim.cmd
 local g = vim.g
@@ -8,6 +6,8 @@ local wo = vim.wo
 local bo = vim.bo
 
 g.mapleader = ','
+
+require("config.lazy")
 
 opt.termguicolors = true
 g.syntax = true
@@ -72,6 +72,9 @@ vim.api.nvim_create_autocmd("CursorHold", {
 -- Goto previous/next diagnostic warning/error
 vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, keymap_opts)
 vim.keymap.set("n", "g]", vim.diagnostic.goto_next, keymap_opts)
+
+vim.keymap.set('n', 'j', 'gj', { noremap = true, silent = true })
+vim.keymap.set('n', 'k', 'gk', { noremap = true, silent = true })
 
 require'config/treesitter'
 require'config/telescope'
