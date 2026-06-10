@@ -21,9 +21,6 @@
 # new windows, tabs, etc.
 font-family = "MD IO Trial"
 
-font-family-bold = 
-font-family-italic = 
-font-family-bold-italic = 
 # The named font style to use for each of the requested terminal font styles.
 # This looks up the style based on the font style string advertised by the
 # font itself. For example, "Iosevka Heavy" has a style of "Heavy".
@@ -147,32 +144,6 @@ adjust-underline-thickness =
 adjust-strikethrough-position = 
 adjust-strikethrough-thickness = 
 adjust-cursor-thickness = 
-# The method to use for calculating the cell width of a grapheme cluster.
-# The default value is `unicode` which uses the Unicode standard to determine
-# grapheme width. This results in correct grapheme width but may result in
-# cursor-desync issues with some programs (such as shells) that may use a
-# legacy method such as `wcswidth`.
-# 
-# Valid values are:
-# 
-#   * `legacy` - Use a legacy method to determine grapheme width, such as
-#     wcswidth This maximizes compatibility with legacy programs but may result
-#     in incorrect grapheme width for certain graphemes such as skin-tone
-#     emoji, non-English characters, etc.
-# 
-#     This is called "legacy" and not something more specific because the
-#     behavior is undefined and we want to retain the ability to modify it.
-#     For example, we may or may not use libc `wcswidth` now or in the future.
-# 
-#   * `unicode` - Use the Unicode standard to determine grapheme width.
-# 
-# If a running program explicitly enables terminal mode 2027, then `unicode`
-# width will be forced regardless of this configuration. When mode 2027 is
-# reset, this configuration will be used again.
-# 
-# This configuration can be changed at runtime but will not affect existing
-# terminals. Only new terminals will use the new configuration.
-grapheme-width-method = unicode
 
 # A named theme to use. The available themes are currently hardcoded to the
 # themes that ship with Ghostty. On macOS, this list is in the `Ghostty.app/
@@ -518,26 +489,6 @@ cursor-opacity = 1
 # 
 cursor-style = block
 
-# Sets the default blinking state of the cursor. This is just the default
-# state; running programs may override the cursor style using `DECSCUSR` (`CSI
-# q`).
-# 
-# If this is not set, the cursor blinks by default. Note that this is not the
-# same as a "true" value, as noted below.
-# 
-# If this is not set at all (`null`), then Ghostty will respect DEC Mode 12
-# (AT&T cursor blink) as an alternate approach to turning blinking on/off. If
-# this is set to any value other than null, DEC mode 12 will be ignored but
-# `DECSCUSR` will still be respected.
-# 
-# Valid values are:
-# 
-#   * `` (blank)
-#   * `true`
-#   * `false`
-# 
-cursor-style-blink = 
-
 # The color of the text under the cursor. If this is not set, a default will
 # be chosen.
 cursor-text = 
@@ -589,63 +540,6 @@ mouse-hide-while-typing = false
 #   * `never`
 # 
 mouse-shift-capture = false
-
-# Multiplier for scrolling distance with the mouse wheel. Any value less
-# than 0.01 or greater than 10,000 will be clamped to the nearest valid
-# value.
-# 
-# A value of "1" (default) scrolls te default amount. A value of "2" scrolls
-# double the default amount. A value of "0.5" scrolls half the default amount.
-# Et cetera.
-mouse-scroll-multiplier = 1
-
-# The opacity level (opposite of transparency) of the background. A value of
-# 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
-# or greater than 1 will be clamped to the nearest valid value.
-background-opacity = 1
-
-# A positive value enables blurring of the background when background-opacity
-# is less than 1. The value is the blur radius to apply. A value of 20
-# is reasonable for a good looking blur. Higher values will cause strange
-# rendering issues as well as performance issues.
-# 
-# This is only supported on macOS.
-background-blur-radius = 0
-
-# The opacity level (opposite of transparency) of an unfocused split.
-# Unfocused splits by default are slightly faded out to make it easier to see
-# which split is focused. To disable this feature, set this value to 1.
-# 
-# A value of 1 is fully opaque and a value of 0 is fully transparent. Because
-# "0" is not useful (it makes the window look very weird), the minimum value
-# is 0.15. This value still looks weird but you can at least see what's going
-# on. A value outside of the range 0.15 to 1 will be clamped to the nearest
-# valid value.
-unfocused-split-opacity = 0.7
-
-# The color to dim the unfocused split. Unfocused splits are dimmed by
-# rendering a semi-transparent rectangle over the split. This sets the color of
-# that rectangle and can be used to carefully control the dimming effect.
-# 
-# This will default to the background color.
-unfocused-split-fill = 
-
-# The command to run, usually a shell. If this is not an absolute path, it'll
-# be looked up in the `PATH`. If this is not set, a default will be looked up
-# from your system. The rules for the default lookup are:
-# 
-#   * `SHELL` environment variable
-# 
-#   * `passwd` entry (user information)
-# 
-# This can contain additional arguments to run the command with. If additional
-# arguments are provided, the command will be executed using `/bin/sh -c`.
-# Ghostty does not do any shell command parsing.
-# 
-# If you're using the `ghostty` CLI there is also a shortcut to run a command
-# with arguments directly: you can use the `-e` flag. For example: `ghostty -e
-# fish --with --custom --args`.
-command = 
 
 # If true, keep the terminal open after the command exits. Normally, the
 # terminal window closes when the running command (such as a shell) exits.
@@ -717,36 +611,6 @@ link-url = true
 # "false", because native fullscreen on macOS requires window decorations
 # to be set.
 fullscreen = false
-
-# The title Ghostty will use for the window. This will force the title of the
-# window to be this title at all times and Ghostty will ignore any set title
-# escape sequences programs (such as Neovim) may send.
-title = 
-
-# The setting that will change the application class value.
-# 
-# This controls the class field of the `WM_CLASS` X11 property (when running
-# under X11), and the Wayland application ID (when running under Wayland).
-# 
-# Note that changing this value between invocations will create new, separate
-# instances, of Ghostty when running with `gtk-single-instance=true`. See that
-# option for more details.
-# 
-# The class name must follow the requirements defined [in the GTK
-# documentation](https://docs.gtk.org/gio/type_func.Application.id_is_valid.html).
-# 
-# The default is `com.mitchellh.ghostty`.
-# 
-# This only affects GTK builds.
-class = 
-
-# This controls the instance name field of the `WM_CLASS` X11 property when
-# running under X11. It has no effect otherwise.
-# 
-# The default is `ghostty`.
-# 
-# This only affects GTK builds.
-x11-instance-name = 
 
 # The directory to change to after starting the command.
 # 
@@ -847,7 +711,7 @@ window-padding-y = 2
 # apply. The other padding is applied first and may affect how many grid cells
 # actually exist, and this is applied last in order to balance the padding
 # given a certain viewport size and grid cell size.
-window-padding-balance = false
+window-padding-balance = true
 
 # Synchronize rendering with the screen refresh rate. If true, this will
 # minimize tearing and align redraws with the screen but may cause input
@@ -1126,60 +990,6 @@ shell-integration-features = cursor,no-sudo,title
 # The default value is `16-bit`.
 osc-color-report-format = 16-bit
 
-# If true, allows the "KAM" mode (ANSI mode 2) to be used within
-# the terminal. KAM disables keyboard input at the request of the
-# application. This is not a common feature and is not recommended
-# to be enabled. This will not be documented further because
-# if you know you need KAM, you know. If you don't know if you
-# need KAM, you don't need it.
-vt-kam-allowed = false
-
-# Custom shaders to run after the default shaders. This is a file path
-# to a GLSL-syntax shader for all platforms.
-# 
-# WARNING: Invalid shaders can cause Ghostty to become unusable such as by
-# causing the window to be completely black. If this happens, you can
-# unset this configuration to disable the shader.
-# 
-# On Linux, this requires OpenGL 4.2. Ghostty typically only requires
-# OpenGL 3.3, but custom shaders push that requirement up to 4.2.
-# 
-# The shader API is identical to the Shadertoy API: you specify a `mainImage`
-# function and the available uniforms match Shadertoy. The iChannel0 uniform
-# is a texture containing the rendered terminal screen.
-# 
-# If the shader fails to compile, the shader will be ignored. Any errors
-# related to shader compilation will not show up as configuration errors
-# and only show up in the log, since shader compilation happens after
-# configuration loading on the dedicated render thread.  For interactive
-# development, use [shadertoy.com](https://shadertoy.com).
-# 
-# This can be repeated multiple times to load multiple shaders. The shaders
-# will be run in the order they are specified.
-# 
-# Changing this value at runtime and reloading the configuration will only
-# affect new windows, tabs, and splits.
-custom-shader = 
-
-# If `true` (default), the focused terminal surface will run an animation
-# loop when custom shaders are used. This uses slightly more CPU (generally
-# less than 10%) but allows the shader to animate. This only runs if there
-# are custom shaders and the terminal is focused.
-# 
-# If this is set to `false`, the terminal and custom shader will only render
-# when the terminal is updated. This is more efficient but the shader will
-# not animate.
-# 
-# This can also be set to `always`, which will always run the animation
-# loop regardless of whether the terminal is focused or not. The animation
-# loop will still only run when custom shaders are used. Note that this
-# will use more CPU per terminal surface and can become quite expensive
-# depending on the shader and your terminal usage.
-# 
-# This value can be changed at runtime and will affect all currently
-# open terminals.
-custom-shader-animation = true
-
 # If anything other than false, fullscreen mode on macOS will not use the
 # native fullscreen, but make the window fullscreen without animations and
 # using a new space. It's faster than the native fullscreen mode since it
@@ -1196,31 +1006,6 @@ custom-shader-animation = true
 # 
 macos-non-native-fullscreen = false
 
-# The style of the macOS titlebar. Available values are: "native",
-# "transparent", and "tabs".
-# 
-# The "native" style uses the native macOS titlebar with zero customization.
-# The titlebar will match your window theme (see `window-theme`).
-# 
-# The "transparent" style is the same as "native" but the titlebar will
-# be transparent and allow your window background color to come through.
-# This makes a more seamless window appearance but looks a little less
-# typical for a macOS application and may not work well with all themes.
-# 
-# The "tabs" style is a completely custom titlebar that integrates the
-# tab bar into the titlebar. This titlebar always matches the background
-# color of the terminal. There are some limitations to this style:
-# On macOS 13 and below, saved window state will not restore tabs correctly.
-# macOS 14 does not have this issue and any other macOS version has not
-# been tested.
-# 
-# The default value is "transparent". This is an opinionated choice
-# but its one I think is the most aesthetically pleasing and works in
-# most cases.
-# 
-# Changing this option at runtime only applies to new windows.
-macos-titlebar-style = transparent
-
 # If `true`, the *Option* key will be treated as *Alt*. This makes terminal
 # sequences expecting *Alt* to work properly, but will break Unicode input
 # sequences on macOS if you use them via the *Alt* key. You may set this to
@@ -1232,79 +1017,6 @@ macos-titlebar-style = transparent
 # 
 # This does not work with GLFW builds.
 macos-option-as-alt = false
-
-# Whether to enable the macOS window shadow. The default value is true.
-# With some window managers and window transparency settings, you may
-# find false more visually appealing.
-macos-window-shadow = true
-
-# Put every surface (tab, split, window) into a dedicated Linux cgroup.
-# 
-# This makes it so that resource management can be done on a per-surface
-# granularity. For example, if a shell program is using too much memory,
-# only that shell will be killed by the oom monitor instead of the entire
-# Ghostty process. Similarly, if a shell program is using too much CPU,
-# only that surface will be CPU-throttled.
-# 
-# This will cause startup times to be slower (a hundred milliseconds or so),
-# so the default value is "single-instance." In single-instance mode, only
-# one instance of Ghostty is running (see gtk-single-instance) so the startup
-# time is a one-time cost. Additionally, single instance Ghostty is much
-# more likely to have many windows, tabs, etc. so cgroup isolation is a
-# big benefit.
-# 
-# This feature requires systemd. If systemd is unavailable, cgroup
-# initialization will fail. By default, this will not prevent Ghostty
-# from working (see linux-cgroup-hard-fail).
-# 
-# Valid values are:
-# 
-#   * `never` - Never use cgroups.
-#   * `always` - Always use cgroups.
-#   * `single-instance` - Enable cgroups only for Ghostty instances launched
-#     as single-instance applications (see gtk-single-instance).
-# 
-linux-cgroup = single-instance
-
-# Memory limit for any individual terminal process (tab, split, window,
-# etc.) in bytes. If this is unset then no memory limit will be set.
-# 
-# Note that this sets the "memory.high" configuration for the memory
-# controller, which is a soft limit. You should configure something like
-# systemd-oom to handle killing processes that have too much memory
-# pressure.
-linux-cgroup-memory-limit = 
-
-# If this is false, then any cgroup initialization (for linux-cgroup)
-# will be allowed to fail and the failure is ignored. This is useful if
-# you view cgroup isolation as a "nice to have" and not a critical resource
-# management feature, because Ghostty startup will not fail if cgroup APIs
-# fail.
-# 
-# If this is true, then any cgroup initialization failure will cause
-# Ghostty to exit or new surfaces to not be created.
-# 
-# Note: this currently only affects cgroup initialization. Subprocesses
-# must always be able to move themselves into an isolated cgroup.
-linux-cgroup-hard-fail = false
-
-# If true, the Ghostty GTK application will run in single-instance mode:
-# each new `ghostty` process launched will result in a new window if there
-# is already a running process.
-# 
-# If false, each new ghostty process will launch a separate application.
-# 
-# The default value is `desktop` which will default to `true` if Ghostty
-# detects it was launched from the `.desktop` file such as an app launcher.
-# If Ghostty is launched from the command line, it will default to `false`.
-# 
-# Note that debug builds of Ghostty have a separate single-instance ID
-# so you can test single instance without conflicting with release builds.
-gtk-single-instance = desktop
-
-# Determines the side of the screen that the GTK tab bar will stick to.
-# Top, bottom, left, and right are supported. The default is top.
-gtk-tabs-location = top
 
 # If `true` (default), then the Ghostty GTK tabs will be "wide." Wide tabs
 # are the new typical Gnome style where tabs fill their available space.
@@ -1340,8 +1052,4 @@ bold-is-bright = false
 # keyprotocol=ghostty:kitty`, however a bug in the implementation prevents it
 # from working properly. https://github.com/vim/vim/pull/13211 fixes this.
 term = xterm-ghostty
-
-# String to send when we receive `ENQ` (`0x05`) from the command that we are
-# running. Defaults to an empty string if not set.
-enquiry-response = 
 

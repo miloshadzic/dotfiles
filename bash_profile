@@ -41,7 +41,7 @@ export PATH=$PATH:~/.rbenv/bin
 export FZF_DEFAULT_COMMAND='fd --type f'
 export BAT_THEME="TwoDark"
 
-alias ls=exa
+alias ls=eza
 alias http="http --style native"
 export PATH=$PATH:$GOPATH/bin
 

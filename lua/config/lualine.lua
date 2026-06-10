@@ -62,12 +62,3 @@ require('lualine').setup {
   tabline = {},
   extensions = {},
 }
-
-require('lualine').setup {
-  options = {
-    theme = bubbles_theme,
-    section_separators = '',
-    component_separators = '',
-    icons_enabled = 0
-  }
-}

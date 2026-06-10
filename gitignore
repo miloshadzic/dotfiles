@@ -2,3 +2,5 @@
 \#*#
 .DS_Store
 /vendor/bundle
+
+**/.claude/settings.local.json

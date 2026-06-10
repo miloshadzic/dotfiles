@@ -22,7 +22,7 @@ return {
     dependencies = { {'nvim-lua/plenary.nvim'} }
   },
 
-  'simrat39/rust-tools.nvim',
+  { 'mrcjkb/rustaceanvim', version = '^6', lazy = false },
   'mfussenegger/nvim-dap',
   'rcarriga/nvim-dap-ui',
   'theHamsta/nvim-dap-virtual-text',
@@ -39,15 +39,16 @@ return {
   'dcampos/nvim-snippy',
   'honza/vim-snippets',
 
-  "hrsh7th/nvim-cmp",
   {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lua",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-    "hrsh7th/cmp-path",
-    'dcampos/cmp-snippy',
-    "hrsh7th/cmp-buffer",
-    dependencies = { "hrsh7th/nvim-cmp" },
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-path",
+      'dcampos/cmp-snippy',
+      "hrsh7th/cmp-buffer",
+    },
   },
   "stevearc/conform.nvim",
 

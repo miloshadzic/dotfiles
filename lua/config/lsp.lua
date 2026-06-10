@@ -23,8 +23,8 @@ cmp.setup({
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = "hrsh7th/cmp-nvim-lua" },
-      { name = "hrsh7th/cmp-nvim-lsp-signature-help" },
+      { name = "nvim_lua" },
+      { name = "nvim_lsp_signature_help" },
       { name = "snippy" },
       { name = 'path' },
     }, {
@@ -32,18 +32,18 @@ cmp.setup({
     })
 })
 
--- Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = false,
-  }
-)
+-- Diagnostics display
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  update_in_insert = false,
+})
 
 vim.lsp.config("emmet_language_server", {})
 
 vim.lsp.enable('biome')
+
+vim.lsp.enable('herb_ls')
 
 -- Setup buffer-local keymaps / options for LSP buffers
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -67,43 +67,29 @@ local lsp_attach = function(client, buf)
 	vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
 end
 
--- Configure LSP through rust-tools.nvim plugin.
--- rust-tools will configure and enable certain LSP features for us.
--- See https://github.com/simrat39/rust-tools.nvim#configuration
-local opts = {
-  tools = {
-    runnables = {
-      use_telescope = true,
-    },
-    inlay_hints = {
-      auto = true,
-      show_parameter_hints = false,
-      parameter_hints_prefix = "",
-      other_hints_prefix = "",
-    },
-  },
-
-  -- all the opts to send to nvim-lspconfig
-  -- these override the defaults set by rust-tools.nvim
-  -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+-- Rust LSP via rustaceanvim. Do NOT call vim.lsp.config/enable for
+-- rust_analyzer or rustaceanvim.setup() -- rustaceanvim manages the server
+-- itself; it only reads this global. See https://github.com/mrcjkb/rustaceanvim
+vim.g.rustaceanvim = {
   server = {
-    -- on_attach is a callback called when the language server attachs to the buffer
-    on_attach = lsp_attach,
+    on_attach = function(client, buf)
+      lsp_attach(client, buf)
+      -- Inlay hints on for Rust buffers (replaces rust-tools tools.inlay_hints.auto)
+      vim.lsp.inlay_hint.enable(true, { bufnr = buf })
+    end,
     capabilities = capabilities,
-    settings = {
-      -- to enable rust-analyzer settings visit:
-      -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+    default_settings = {
       ["rust-analyzer"] = {
         -- enable clippy on save
-        checkOnSave = {
-          command = "clippy",
+        checkOnSave = { command = "clippy" },
+        -- replaces rust-tools' show_parameter_hints = false
+        inlayHints = {
+          parameterHints = { enable = false },
         },
       },
     },
   },
 }
-
-vim.lsp.config("rust-tools", opts)
 
 vim.lsp.config("ts_ls", {})
 
@@ -134,6 +120,19 @@ require('go').setup(
 vim.lsp.config('lspconfig-bundler', {})
 vim.lsp.config("solargraph", {})
 
+-- Actually start the configured servers. vim.lsp.config() only registers
+-- settings; vim.lsp.enable() is what attaches the server to matching buffers.
+vim.lsp.enable({
+  "emmet_language_server",
+  "ts_ls",
+  "gopls",
+  "ruby_lsp",
+  "clangd",
+  "sqlls",
+})
+-- Note: solargraph intentionally left disabled to avoid running two Ruby
+-- LSPs alongside ruby_lsp. Enable it instead of ruby_lsp if you prefer it.
+
 require("conform").setup({
   formatters = {
     biome = {
@@ -151,10 +150,5 @@ require("conform").setup({
     css = { "biome-check", "biome", stop_after_first = true },
     javascript = { "biome-check", "biome", "prettierd", "prettier", stop_after_first = true },
     typescript = { "biome-check", "biome", stop_after_first = true },
-  },
-  format_on_save = {
-    -- These options will be passed to conform.format()
-    timeout_ms = 500,
-    lsp_format = "fallback",
-  },
+  }
 })
