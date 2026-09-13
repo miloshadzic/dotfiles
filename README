@@ -1,1 +1,8 @@
-Not recommended.
+Dotfiles, managed with GNU Stow. Each top-level directory is a package
+that mirrors $HOME.
+
+  ./install.sh            link everything for this OS
+  stow --restow fish      relink one package after adding files
+  stow --delete kitty     unlink a package
+
+Machine-specific fish settings go in ~/.config/fish/local.fish (not committed).
