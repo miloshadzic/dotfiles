@@ -56,5 +56,31 @@ return {
 
   'tpope/vim-fugitive',
 
+  {
+    "FabijanZulj/blame.nvim",
+    lazy = false,
+    config = function()
+      require('blame').setup {}
+    end,
+  },
+
   'nvim-lualine/lualine.nvim',
+
+  {
+    "clabby/difftastic.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      -- optional: only needed for :DifftPick
+      "folke/snacks.nvim",
+    },
+    config = function()
+      require("difftastic-nvim").setup({
+        vcs = "git",
+        download = true, -- Auto-download pre-built binary
+        snacks_picker = {
+          enabled = true,
+        },
+      })
+    end,
+  }
 }

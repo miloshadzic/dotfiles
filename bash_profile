@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/mh/.docker/bin"
+# End of Docker Desktop section.
+
 export PATH="/home/milos/.local/share/solana/install/active_release/bin:$PATH"
 . "$HOME/.cargo/env"
 
