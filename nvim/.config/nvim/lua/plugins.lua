@@ -3,6 +3,8 @@ return {
   'git@github.com:miloshadzic/xemucy.git',
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate'
   },
 
