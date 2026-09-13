@@ -19,18 +19,13 @@ return {
 
   'neovim/nvim-lspconfig',
 
-  'dcampos/nvim-snippy',
-  'honza/vim-snippets',
-
   {
-    "hrsh7th/nvim-cmp",
+    'saghen/blink.cmp',
+    -- release tags download a pre-built fuzzy matcher binary
+    version = '1.*',
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-path",
-      'dcampos/cmp-snippy',
-      "hrsh7th/cmp-buffer",
+      { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+      'honza/vim-snippets',
     },
   },
   "stevearc/conform.nvim",

@@ -1,35 +1,24 @@
--- nvim_lsp object
-local cmp = require'cmp'
-
-cmp.setup({
-    preselect = cmp.PreselectMode.None,
-    view = {
-      entries = "native"
+require('blink.cmp').setup({
+  -- <CR> accepts, <Tab>/<S-Tab> expand or jump through snippets,
+  -- <C-space> opens the menu, <C-e> closes it, <C-n>/<C-p> select
+  keymap = {
+    preset = 'enter',
+    ['<C-d>'] = { 'scroll_documentation_up', 'fallback' },
+  },
+  snippets = { preset = 'luasnip' },
+  completion = {
+    -- First item is highlighted so <CR> accepts it, but nothing is
+    -- inserted into the buffer until you accept
+    list = { selection = { preselect = true, auto_insert = false } },
+    documentation = { auto_show = true },
+  },
+  signature = { enabled = true },
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+    providers = {
+      buffer = { min_keyword_length = 3 },
     },
-    mapping = {
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = true
-      }),
-    },
-    snippet = {
-      expand = function(args)
-        require 'snippy'.expand_snippet(args.body)
-      end
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = "nvim_lua" },
-      { name = "nvim_lsp_signature_help" },
-      { name = "snippy" },
-      { name = 'path' },
-    }, {
-      { name = "buffer", keyword_length = 3 },
-    })
+  },
 })
 
 -- Diagnostics display
@@ -44,9 +33,9 @@ vim.lsp.config("emmet_language_server", {})
 
 vim.lsp.enable('biome')
 
--- Advertise nvim-cmp completion capabilities to every server
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-vim.lsp.config("*", { capabilities = capabilities })
+-- blink.cmp registers its capabilities for vim.lsp.config servers itself;
+-- rustaceanvim starts rust-analyzer on its own, so pass them explicitly
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 -- Rust LSP via rustaceanvim. Do NOT call vim.lsp.config/enable for
 -- rust_analyzer or rustaceanvim.setup() -- rustaceanvim manages the server
