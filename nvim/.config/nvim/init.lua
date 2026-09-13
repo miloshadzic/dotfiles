@@ -1,50 +1,36 @@
 local opt = vim.opt
 local cmd = vim.cmd
 local g = vim.g
-local o = vim.o
-local wo = vim.wo
-local bo = vim.bo
 
 g.mapleader = ','
 
 require("config.lazy")
 
 opt.termguicolors = true
-g.syntax = true
 
 require 'xemucy'
-
-opt.completeopt = 'menuone,noselect,longest'
 
 -- Temporarily source the vim part
 cmd('source ~/.config/nvim/vimconfig.vim')
 
-opt.autoindent = true
-opt.autoread = true
-opt.encoding = 'utf-8'
 opt.expandtab = true
 opt.ignorecase = true
-opt.incsearch = true
 opt.inccommand = 'split'
-opt.laststatus = 2
 opt.list = true
-opt.ruler = true
 opt.scrolloff = 3
 opt.shiftwidth = 2
-opt.showcmd = true
 opt.smartcase = true
 opt.softtabstop = 2
 opt.tabstop = 2
-opt.wildmenu = true
 opt.wildmode = 'longest:full,full'
 opt.mouse = 'a'
-wo.number = true
-wo.relativenumber = true
+opt.number = true
+opt.relativenumber = true
 
 opt.listchars = { tab = "▸ ", trail = "▫" }
 
-vim.o.completeopt = "menuone,noinsert,noselect"
-vim.opt.shortmess = vim.opt.shortmess + "c"
+opt.completeopt = "menuone,noinsert,noselect"
+opt.shortmess:append("c")
 
 local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -55,8 +41,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_sync_grp,
 })
 
--- Set updatetime for CursorHold
--- 300ms of no cursor movement to trigger CursorHold
+-- 100ms of no cursor movement to trigger CursorHold
 opt.updatetime = 100
 
 -- Show diagnostic popup on cursor hover
@@ -70,11 +55,11 @@ vim.api.nvim_create_autocmd("CursorHold", {
 
 
 -- Goto previous/next diagnostic warning/error
-vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, keymap_opts)
-vim.keymap.set("n", "g]", vim.diagnostic.goto_next, keymap_opts)
+vim.keymap.set("n", "g[", function() vim.diagnostic.jump({ count = -1, float = true }) end)
+vim.keymap.set("n", "g]", function() vim.diagnostic.jump({ count = 1, float = true }) end)
 
-vim.keymap.set('n', 'j', 'gj', { noremap = true, silent = true })
-vim.keymap.set('n', 'k', 'gk', { noremap = true, silent = true })
+vim.keymap.set('n', 'j', 'gj', { silent = true })
+vim.keymap.set('n', 'k', 'gk', { silent = true })
 
 require'config/treesitter'
 require'config/telescope'
@@ -83,6 +68,14 @@ require'config/lualine'
 require'config/comment'
 require'config/snippets'
 
-vim.cmd('autocmd FileType ruby setlocal indentkeys-=.')
-
-vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = false}]]
+local ft_grp = vim.api.nvim_create_augroup("FiletypeTweaks", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "ruby",
+  command = "setlocal indentkeys-=.",
+  group = ft_grp,
+})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.odin",
+  callback = function() vim.lsp.buf.format({ async = false }) end,
+  group = ft_grp,
+})

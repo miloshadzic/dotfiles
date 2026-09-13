@@ -5,7 +5,7 @@ require('telescope').setup {
     }
   },
   extensions = {
-    fzf_native = {
+    fzf = {
       override_generic_sorter = false,
       override_file_sorter = true,
     }

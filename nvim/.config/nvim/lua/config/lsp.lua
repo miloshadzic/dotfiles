@@ -43,35 +43,16 @@ vim.lsp.config("emmet_language_server", {})
 
 vim.lsp.enable('biome')
 
--- Setup buffer-local keymaps / options for LSP buffers
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lsp_attach = function(client, buf)
-	-- Example maps, set your own with vim.api.nvim_buf_set_keymap(buf, "n", <lhs>, <rhs>, { desc = <desc> })
-	-- or a plugin like which-key.nvim
-	-- <lhs>        <rhs>                        <desc>
-	-- "K"          vim.lsp.buf.hover            "Hover Info"
-	-- "<leader>qf" vim.diagnostic.setqflist     "Quickfix Diagnostics"
-	-- "[d"         vim.diagnostic.goto_prev     "Previous Diagnostic"
-	-- "]d"         vim.diagnostic.goto_next     "Next Diagnostic"
-	-- "<leader>e"  vim.diagnostic.open_float    "Explain Diagnostic"
-	-- "<leader>ca" vim.lsp.buf.code_action      "Code Action"
-	-- "<leader>cr" vim.lsp.buf.rename           "Rename Symbol"
-	-- "<leader>fs" vim.lsp.buf.document_symbol  "Document Symbols"
-	-- "<leader>fS" vim.lsp.buf.workspace_symbol "Workspace Symbols"
-	-- "<leader>gq" vim.lsp.buf.formatting_sync  "Format File"
-
-	vim.api.nvim_buf_set_option(buf, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-	vim.api.nvim_buf_set_option(buf, "omnifunc", "v:lua.vim.lsp.omnifunc")
-	vim.api.nvim_buf_set_option(buf, "tagfunc", "v:lua.vim.lsp.tagfunc")
-end
+-- Advertise nvim-cmp completion capabilities to every server
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+vim.lsp.config("*", { capabilities = capabilities })
 
 -- Rust LSP via rustaceanvim. Do NOT call vim.lsp.config/enable for
 -- rust_analyzer or rustaceanvim.setup() -- rustaceanvim manages the server
 -- itself; it only reads this global. See https://github.com/mrcjkb/rustaceanvim
 vim.g.rustaceanvim = {
   server = {
-    on_attach = function(client, buf)
-      lsp_attach(client, buf)
+    on_attach = function(_, buf)
       -- Inlay hints on for Rust buffers (replaces rust-tools tools.inlay_hints.auto)
       vim.lsp.inlay_hint.enable(true, { bufnr = buf })
     end,
@@ -79,7 +60,7 @@ vim.g.rustaceanvim = {
     default_settings = {
       ["rust-analyzer"] = {
         -- enable clippy on save
-        checkOnSave = { command = "clippy" },
+        check = { command = "clippy" },
         -- replaces rust-tools' show_parameter_hints = false
         inlayHints = {
           parameterHints = { enable = false },
@@ -112,10 +93,7 @@ vim.lsp.config("sqlls", {
   cmd = {"sql-language-server", "up", "--method", "stdio"}
 })
 
-require('go').setup(
-)
-
-vim.lsp.config('lspconfig-bundler', {})
+require('go').setup()
 
 -- Actually start the configured servers. vim.lsp.config() only registers
 -- settings; vim.lsp.enable() is what attaches the server to matching buffers.

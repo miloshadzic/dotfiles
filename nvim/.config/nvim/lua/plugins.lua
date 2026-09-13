@@ -1,12 +1,4 @@
 return {
-  {
-    "vhyrro/luarocks.nvim",
-    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-    config = true,
-  },
-
-  'lewis6991/impatient.nvim',
-
   'tjdevries/colorbuddy.nvim',
   'git@github.com:miloshadzic/xemucy.git',
   {
@@ -14,17 +6,16 @@ return {
     build = ':TSUpdate'
   },
 
-  'nvim-lua/popup.nvim',
   'numToStr/Comment.nvim',
 
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.4',
+    'nvim-telescope/telescope.nvim', version = '^0.2',
     dependencies = { {'nvim-lua/plenary.nvim'} }
   },
 
-  { 'mrcjkb/rustaceanvim', version = '^6', lazy = false },
+  { 'mrcjkb/rustaceanvim', version = '^9', lazy = false },
   'mfussenegger/nvim-dap',
-  'rcarriga/nvim-dap-ui',
+  { 'rcarriga/nvim-dap-ui', dependencies = { 'nvim-neotest/nvim-nio' } },
   'theHamsta/nvim-dap-virtual-text',
   'ray-x/guihua.lua',
 
@@ -33,8 +24,6 @@ return {
   'ray-x/go.nvim',
 
   'neovim/nvim-lspconfig',
-  'nvim-lua/lsp_extensions.nvim',
-  { 'mihyaeru21/nvim-lspconfig-bundler', dependencies = 'neovim/nvim-lspconfig' },
 
   'dcampos/nvim-snippy',
   'honza/vim-snippets',
