@@ -3,7 +3,7 @@ local ts = require('nvim-treesitter')
 -- No-op for parsers that are already installed
 ts.install {
   'bash', 'c', 'css', 'embedded_template', 'fish', 'go', 'html', 'javascript',
-  'json', 'lua', 'markdown', 'markdown_inline', 'odin', 'query', 'ruby', 'rust',
+  'json', 'lua', 'markdown', 'markdown_inline', 'query', 'ruby', 'rust',
   'sql', 'toml', 'tsx', 'typescript', 'vim', 'vimdoc', 'yaml',
 }
 

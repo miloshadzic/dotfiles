@@ -8,22 +8,14 @@ return {
     build = ':TSUpdate'
   },
 
-  'numToStr/Comment.nvim',
-
   {
     'nvim-telescope/telescope.nvim', version = '^0.2',
     dependencies = { {'nvim-lua/plenary.nvim'} }
   },
 
   { 'mrcjkb/rustaceanvim', version = '^9', lazy = false },
-  'mfussenegger/nvim-dap',
-  { 'rcarriga/nvim-dap-ui', dependencies = { 'nvim-neotest/nvim-nio' } },
-  'theHamsta/nvim-dap-virtual-text',
-  'ray-x/guihua.lua',
 
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-
-  'ray-x/go.nvim',
 
   'neovim/nvim-lspconfig',
 
@@ -59,17 +51,13 @@ return {
 
   {
     "clabby/difftastic.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      -- optional: only needed for :DifftPick
-      "folke/snacks.nvim",
-    },
+    dependencies = { "MunifTanjim/nui.nvim" },
     config = function()
       require("difftastic-nvim").setup({
         vcs = "git",
         download = true, -- Auto-download pre-built binary
         snacks_picker = {
-          enabled = true,
+          enabled = false,
         },
       })
     end,

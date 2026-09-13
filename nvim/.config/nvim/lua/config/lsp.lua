@@ -34,7 +34,8 @@ cmp.setup({
 
 -- Diagnostics display
 vim.diagnostic.config({
-  virtual_text = true,
+  -- Shown in a float on CursorHold instead (see init.lua)
+  virtual_text = false,
   signs = true,
   update_in_insert = false,
 })
@@ -93,8 +94,6 @@ vim.lsp.config("sqlls", {
   cmd = {"sql-language-server", "up", "--method", "stdio"}
 })
 
-require('go').setup()
-
 -- Actually start the configured servers. vim.lsp.config() only registers
 -- settings; vim.lsp.enable() is what attaches the server to matching buffers.
 vim.lsp.enable({
@@ -110,7 +109,25 @@ vim.lsp.enable({
 -- Note: solargraph intentionally left disabled to avoid running two Ruby
 -- LSPs alongside ruby_lsp. Enable it instead of ruby_lsp if you prefer it.
 
+-- Format on save only for these filetypes; everything else is formatted
+-- manually. HTML/ERB is only formatted under ~/src/designfiles/df.
+local format_on_save_ft = { rust = true, go = true, ruby = true }
+local df_dir = vim.fn.fnamemodify("~/src/designfiles/df", ":p")
+
 require("conform").setup({
+  format_on_save = function(bufnr)
+    local ft = vim.bo[bufnr].filetype
+    if not format_on_save_ft[ft] then
+      if ft ~= "html" and ft ~= "eruby" then
+        return
+      end
+      local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":p")
+      if path:sub(1, #df_dir) ~= df_dir then
+        return
+      end
+    end
+    return { lsp_format = "fallback", timeout_ms = 3000 }
+  end,
   formatters = {
     biome = {
       require_cwd = true,
@@ -118,6 +135,7 @@ require("conform").setup({
   },
   formatters_by_ft = {
     rust =  { "rustfmt", lsp_format = "fallback" },
+    go =    { "goimports", "gofumpt" },
     -- Ruby formats via ruby-lsp (rubocop); no CLI formatter so conform
     -- falls back to the LSP when lsp_format = "fallback".
     ruby =  {},
@@ -130,27 +148,4 @@ require("conform").setup({
     javascript = { "biome-check", "biome", "prettierd", "prettier", stop_after_first = true },
     typescript = { "biome-check", "biome", stop_after_first = true },
   }
-})
-
--- Format Ruby on save via ruby-lsp (rubocop). Scoped to ruby so other
--- filetypes keep their existing (non-format-on-save) behaviour.
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.rb", "*.rake", "Gemfile", "Rakefile" },
-  callback = function(args)
-    require("conform").format({ bufnr = args.buf, lsp_format = "fallback", timeout_ms = 3000 })
-  end,
-})
-
--- Format HTML/ERB on save via htmlbeautifier, but only for files under
--- ~/src/designfiles/df. Other html/eruby buffers are left untouched.
-local df_dir = vim.fn.fnamemodify("~/src/designfiles/df", ":p")
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.html.erb", "*.html", "*.erb" },
-  callback = function(args)
-    local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(args.buf), ":p")
-    if path:sub(1, #df_dir) ~= df_dir then
-      return
-    end
-    require("conform").format({ bufnr = args.buf, lsp_format = "fallback", timeout_ms = 3000 })
-  end,
 })
