@@ -3,5 +3,24 @@ filekinds:
   directory: {foreground: "#aaaaaa", is_bold: true}
   symlink: {foreground: "#777777", is_italic: true, is_bold: false}
   mount_point: {foreground: "#7777777", is_italic: true, is_bold: true}
+  executable: {foreground: "LightBlue", is_bold: false, is_italic: true}
+
+filenames:
+  README: {is_underline: false}
+
+perms:
+  user_read: {foreground: "LightGray"}
+  user_write: {foreground: "LightGray"}
+  user_execute_file: {foreground: "LightGray", is_underline: false}
+  user_execute_other: {foreground: "LightGray"}
+  group_read: {foreground: "LightGray"}
+  group_write: {foreground: "LightGray"}
+  group_execute: {foreground: "LightGray"}
+  other_read: {foreground: "LightGray"}
+  other_write: {foreground: "LightGray"}
+  other_execute: {foreground: "LightGray"}
+  special_user_file: {foreground: "LightGray"}
+  special_other: {foreground: "LightGray"}
+  attribute: {foreground: "LightGray"}
 
 date: {foreground: "#777777"}
