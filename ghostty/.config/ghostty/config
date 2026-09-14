@@ -29,3 +29,9 @@ window-padding-balance = true
 window-colorspace = display-p3
 window-padding-x = 4
 window-padding-y = 4
+
+auto-update-channel = tip
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = hidden
+
+macos-icon = retro
