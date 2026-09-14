@@ -3,7 +3,7 @@
 set -e
 cd "$(dirname "$0")"
 
-common="fish nvim git bash"
+common="fish nvim git bash eza"
 
 case "$(uname)" in
   Darwin)

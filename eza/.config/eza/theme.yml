@@ -1,0 +1,7 @@
+# Named colors use the terminal palette, so they follow the ghostty/kitty theme
+filekinds:
+  directory: {foreground: "#aaaaaa", is_bold: true}
+  symlink: {foreground: "#777777", is_italic: true, is_bold: false}
+  mount_point: {foreground: "#7777777", is_italic: true, is_bold: true}
+
+date: {foreground: "#777777"}

@@ -21,6 +21,9 @@ switch (uname)
     case Linux
 end
 
+# eza only checks XDG_CONFIG_HOME, which is unset on macOS
+set -gx EZA_CONFIG_DIR ~/.config/eza
+
 set -g hydro_color_pwd bryellow
 set -g hydro_symbol_prompt →
 
