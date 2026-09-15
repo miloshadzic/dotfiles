@@ -77,6 +77,14 @@ vim.lsp.config("ruby_lsp", {
   filetypes = { 'ruby' }
 })
 
+vim.lsp.config("herb_ls", {
+  settings = {
+    languageServerHerb = {
+      formatter = { enabled = true },
+    },
+  },
+})
+
 vim.lsp.config("clangd", {})
 
 vim.lsp.config("sqlls", {
@@ -128,8 +136,8 @@ require("conform").setup({
     -- Ruby formats via ruby-lsp (rubocop); no CLI formatter so conform
     -- falls back to the LSP when lsp_format = "fallback".
     ruby =  {},
-    html =  { "htmlbeautifier", lsp_format = "fallback" },
-    eruby = { "htmlbeautifier", lsp_format = "fallback" },
+    html =  {},
+    eruby = {},
 
 
     json = { "biome-check", "biome", stop_after_first = true },
