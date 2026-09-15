@@ -38,5 +38,7 @@ if type -q mise
     end
 end
 
+zoxide init fish | source
+
 # Machine-specific settings and secrets; not committed
 test -f $__fish_config_dir/local.fish; and source $__fish_config_dir/local.fish

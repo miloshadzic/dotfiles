@@ -1,12 +1,22 @@
 # Named colors use the terminal palette, so they follow the ghostty/kitty theme
 filekinds:
   directory: {foreground: "#aaaaaa", is_bold: true}
-  symlink: {foreground: "#777777", is_italic: true, is_bold: false}
+  symlink: {foreground: "#aaaaaa", is_italic: true, is_bold: false}
   mount_point: {foreground: "#7777777", is_italic: true, is_bold: true}
-  executable: {foreground: "LightBlue", is_bold: false, is_italic: true}
+  executable: {foreground: "LightCyan", is_bold: false, is_italic: true}
+  special: {foreground: "Magenta", is_bold: false, is_italic: true}
+  block_device: {foreground: "Magenta", is_bold: false, is_italic: true}
+  pipe: {foreground: "Magenta", is_bold: false, is_italic: true}
+  char_device: {foreground: "Magenta", is_bold: false, is_italic: true}
+  socket: {foreground: "Magenta", is_bold: false, is_italic: true}
 
-filenames:
-  README: {is_underline: false}
+file_type:
+  build:
+    foreground: LightYellow
+    is_underline: false
+
+symlink_path:
+  foreground: DarkGray
 
 perms:
   user_read: {foreground: "LightGray"}
